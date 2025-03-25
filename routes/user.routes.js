@@ -1,13 +1,13 @@
 import { Router } from "express";
+import { getUsers, getUser } from "../controllers/user.controller.js";
+import authorize from "../middlewares/auth.middleware.js";
 
 const userRouter = Router();
 
-userRouter.get("/", (req, res) => {
-  res.send({ title: "Profile route" });
-});
-userRouter.get("/:id", (req, res) => {
-  res.send({ title: "User profile route" });
-});
+userRouter.get("/", getUsers);
+
+userRouter.get("/:id", authorize, getUser);
+
 userRouter.put("/:id", (req, res) => {
   res.send({ title: "Update user profile route" });
 });
